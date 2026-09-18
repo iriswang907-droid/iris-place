@@ -3,22 +3,770 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="description"
+    content="Iris’s Place——记录课程、阅读与研究的个人学习空间。"
+  >
+
   <title>Iris’s Place</title>
+
+  <style>
+    :root {
+      --background: #f7faf7;
+      --surface: rgba(255, 255, 255, 0.88);
+      --surface-solid: #ffffff;
+      --text: #26332d;
+      --muted: #66736d;
+      --primary: #5d8977;
+      --primary-dark: #416b5b;
+      --accent: #dcece5;
+      --border: #dce5df;
+      --shadow: 0 16px 45px rgba(53, 79, 67, 0.09);
+    }
+
+    html[data-theme="dark"] {
+      --background: #17211d;
+      --surface: rgba(34, 48, 42, 0.9);
+      --surface-solid: #22302a;
+      --text: #edf5f0;
+      --muted: #adbbb4;
+      --primary: #91c4ae;
+      --primary-dark: #b4dac9;
+      --accent: #2d443a;
+      --border: #3a4c44;
+      --shadow: 0 16px 45px rgba(0, 0, 0, 0.2);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, var(--accent), transparent 35%),
+        var(--background);
+      font-family:
+        -apple-system, BlinkMacSystemFont, "Segoe UI",
+        "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei",
+        Arial, sans-serif;
+      line-height: 1.7;
+      transition: color 0.25s, background-color 0.25s;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .container {
+      width: min(1080px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid var(--border);
+      background: color-mix(in srgb, var(--background) 88%, transparent);
+      backdrop-filter: blur(14px);
+    }
+
+    .navigation {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .logo {
+      color: var(--primary-dark);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 22px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      font-size: 0.94rem;
+      text-decoration: none;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary-dark);
+    }
+
+    .controls {
+      display: flex;
+      gap: 8px;
+    }
+
+    .control-button {
+      min-width: 44px;
+      height: 38px;
+      padding: 0 12px;
+      color: var(--text);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      cursor: pointer;
+    }
+
+    .control-button:hover {
+      border-color: var(--primary);
+    }
+
+    .hero {
+      min-height: 70vh;
+      display: grid;
+      grid-template-columns: 1.35fr 0.65fr;
+      align-items: center;
+      gap: 60px;
+      padding: 90px 0 70px;
+    }
+
+    .eyebrow {
+      margin: 0 0 14px;
+      color: var(--primary-dark);
+      font-size: 0.88rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: Georgia, "Times New Roman", serif;
+      line-height: 1.25;
+    }
+
+    h1 {
+      max-width: 720px;
+      margin: 0;
+      font-size: clamp(3rem, 8vw, 5.8rem);
+      letter-spacing: -0.04em;
+    }
+
+    .hero-description {
+      max-width: 650px;
+      margin: 24px 0 32px;
+      color: var(--muted);
+      font-size: 1.12rem;
+    }
+
+    .button-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 11px 20px;
+      border: 1px solid var(--primary);
+      border-radius: 999px;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .button-primary {
+      color: #ffffff;
+      background: var(--primary-dark);
+    }
+
+    .button-secondary {
+      color: var(--primary-dark);
+      background: transparent;
+    }
+
+    .hero-note {
+      padding: 28px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      transform: rotate(2deg);
+    }
+
+    .hero-note span {
+      color: var(--primary);
+      font-size: 2rem;
+    }
+
+    .hero-note p {
+      margin: 12px 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.2rem;
+    }
+
+    .hero-note small {
+      color: var(--muted);
+    }
+
+    section {
+      padding: 76px 0;
+      scroll-margin-top: 80px;
+    }
+
+    .section-heading {
+      margin-bottom: 32px;
+    }
+
+    .section-heading p {
+      margin: 0 0 8px;
+      color: var(--primary-dark);
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .section-heading h2 {
+      margin: 0;
+      font-size: clamp(2rem, 5vw, 3rem);
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 22px;
+    }
+
+    .card {
+      padding: 28px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: var(--primary);
+    }
+
+    .card-number {
+      color: var(--primary);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 0.9rem;
+    }
+
+    .card h3 {
+      margin: 12px 0 10px;
+      font-size: 1.45rem;
+    }
+
+    .card p {
+      margin: 0 0 20px;
+      color: var(--muted);
+    }
+
+    .card-link {
+      color: var(--primary-dark);
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .about-panel {
+      display: grid;
+      grid-template-columns: 0.8fr 1.2fr;
+      gap: 50px;
+      align-items: start;
+      padding: 42px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+    }
+
+    .about-panel h2 {
+      margin-top: 0;
+      font-size: 2.4rem;
+    }
+
+    .about-panel p {
+      margin-top: 0;
+      color: var(--muted);
+    }
+
+    .tags {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 24px;
+    }
+
+    .tag {
+      padding: 6px 12px;
+      color: var(--primary-dark);
+      background: var(--accent);
+      border-radius: 999px;
+      font-size: 0.88rem;
+    }
+
+    .empty-state {
+      padding: 42px;
+      text-align: center;
+      background: var(--surface);
+      border: 1px dashed var(--primary);
+      border-radius: 24px;
+    }
+
+    .empty-state h3 {
+      margin-top: 0;
+      font-size: 1.5rem;
+    }
+
+    .empty-state p {
+      max-width: 650px;
+      margin: 0 auto;
+      color: var(--muted);
+    }
+
+    .tool-list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .tool {
+      padding: 22px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      text-decoration: none;
+    }
+
+    .tool:hover {
+      border-color: var(--primary);
+    }
+
+    .tool strong {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--primary-dark);
+    }
+
+    .tool span {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    footer {
+      padding: 30px 0 45px;
+      color: var(--muted);
+      text-align: center;
+      border-top: 1px solid var(--border);
+    }
+
+    html[lang="zh-CN"] .en {
+      display: none;
+    }
+
+    html[lang="en"] .zh {
+      display: none;
+    }
+
+    @media (max-width: 780px) {
+      .navigation {
+        padding: 14px 0;
+        align-items: flex-start;
+      }
+
+      .nav-links > a {
+        display: none;
+      }
+
+      .hero {
+        min-height: auto;
+        grid-template-columns: 1fr;
+        gap: 35px;
+        padding: 70px 0 50px;
+      }
+
+      .hero-note {
+        transform: none;
+      }
+
+      .card-grid,
+      .about-panel,
+      .tool-list {
+        grid-template-columns: 1fr;
+      }
+
+      .about-panel {
+        gap: 18px;
+        padding: 28px;
+      }
+
+      section {
+        padding: 55px 0;
+      }
+    }
+  </style>
 </head>
 
 <body>
-  <h1>欢迎来到 Iris’s Place</h1>
-  <p>这是我的个人学习空间。</p>
+  <header class="site-header">
+    <nav class="container navigation" aria-label="Main navigation">
+      <a class="logo" href="#home">Iris’s Place</a>
 
-  <h2>课程</h2>
-  <ul>
-    <li>鲁迅研究</li>
-    <li>《红楼梦》研究</li>
-  </ul>
+      <div class="nav-links">
+        <a href="#about">
+          <span class="zh">关于</span>
+          <span class="en">About</span>
+        </a>
 
-  <h2>关于这个网站</h2>
-  <p>
-    这里将用于整理我的课程笔记、阅读记录、研究成果和常用学习工具。
-  </p>
+        <a href="#courses">
+          <span class="zh">课程</span>
+          <span class="en">Courses</span>
+        </a>
+
+        <a href="#research">
+          <span class="zh">研究</span>
+          <span class="en">Research</span>
+        </a>
+
+        <a href="#tools">
+          <span class="zh">工具</span>
+          <span class="en">Tools</span>
+        </a>
+
+        <div class="controls">
+          <button
+            class="control-button"
+            id="languageButton"
+            type="button"
+            aria-label="切换语言"
+          >
+            <span class="zh">EN</span>
+            <span class="en">中文</span>
+          </button>
+
+          <button
+            class="control-button"
+            id="themeButton"
+            type="button"
+            aria-label="切换深色模式"
+          >
+            ◐
+          </button>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero container" id="home">
+      <div>
+        <p class="eyebrow">
+          <span class="zh">文学 · 阅读 · 研究</span>
+          <span class="en">Literature · Reading · Research</span>
+        </p>
+
+        <h1>Iris’s Place</h1>
+
+        <p class="hero-description zh">
+          一个用于整理课程笔记、阅读记录与研究过程的个人学习空间。
+          在持续阅读和写作中，逐步建立属于自己的知识体系。
+        </p>
+
+        <p class="hero-description en">
+          A personal learning space for course notes, reading records,
+          and research in progress—built gradually through reading and writing.
+        </p>
+
+        <div class="button-row">
+          <a class="button button-primary" href="#courses">
+            <span class="zh">浏览课程</span>
+            <span class="en">Explore courses</span>
+          </a>
+
+          <a class="button button-secondary" href="#about">
+            <span class="zh">了解更多</span>
+            <span class="en">About me</span>
+          </a>
+        </div>
+      </div>
+
+      <aside class="hero-note">
+        <span>“</span>
+
+        <p class="zh">
+          这里记录阅读留下的痕迹，也保存尚未完成的思考。
+        </p>
+
+        <p class="en">
+          A place for traces of reading and thoughts still in progress.
+        </p>
+
+        <small>— Iris</small>
+      </aside>
+    </section>
+
+    <section class="container" id="courses">
+      <div class="section-heading">
+        <p>
+          <span class="zh">正在学习</span>
+          <span class="en">Current study</span>
+        </p>
+
+        <h2>
+          <span class="zh">课程与笔记</span>
+          <span class="en">Courses and notes</span>
+        </h2>
+      </div>
+
+      <div class="card-grid">
+        <article class="card">
+          <span class="card-number">COURSE 01</span>
+
+          <h3>
+            <span class="zh">鲁迅研究</span>
+            <span class="en">Lu Xun Studies</span>
+          </h3>
+
+          <p class="zh">
+            整理鲁迅作品阅读、课堂内容、相关研究与个人思考。
+          </p>
+
+          <p class="en">
+            Notes on Lu Xun’s works, class discussions, scholarship,
+            and personal reflections.
+          </p>
+
+          <a class="card-link" href="#">
+            <span class="zh">内容即将更新 →</span>
+            <span class="en">Coming soon →</span>
+          </a>
+        </article>
+
+        <article class="card">
+          <span class="card-number">COURSE 02</span>
+
+          <h3>
+            <span class="zh">《红楼梦》研究</span>
+            <span class="en">Dream of the Red Chamber Studies</span>
+          </h3>
+
+          <p class="zh">
+            记录文本细读、人物关系、主题分析及相关研究资料。
+          </p>
+
+          <p class="en">
+            Close reading, character relationships, thematic analysis,
+            and related research materials.
+          </p>
+
+          <a class="card-link" href="#">
+            <span class="zh">内容即将更新 →</span>
+            <span class="en">Coming soon →</span>
+          </a>
+        </article>
+      </div>
+    </section>
+
+    <section class="container" id="about">
+      <div class="about-panel">
+        <div>
+          <p class="eyebrow">
+            <span class="zh">关于我</span>
+            <span class="en">About me</span>
+          </p>
+
+          <h2>
+            <span class="zh">你好，我是 Iris。</span>
+            <span class="en">Hello, I’m Iris.</span>
+          </h2>
+        </div>
+
+        <div>
+          <p class="zh">
+            我正在建立自己的数字学习空间。这里主要用于整理课程笔记、
+            阅读记录、研究成果与常用学习工具。我希望通过持续记录，
+            逐步形成清晰且能够不断生长的个人知识体系。
+          </p>
+
+          <p class="en">
+            I am building a personal digital learning space for course notes,
+            reading records, research outcomes, and useful academic tools.
+            Through consistent documentation, I hope to develop a clear and
+            continually growing knowledge system.
+          </p>
+
+          <div class="tags">
+            <span class="tag">
+              <span class="zh">中国现代文学</span>
+              <span class="en">Modern Chinese Literature</span>
+            </span>
+
+            <span class="tag">
+              <span class="zh">古典文学</span>
+              <span class="en">Classical Literature</span>
+            </span>
+
+            <span class="tag">
+              <span class="zh">阅读与写作</span>
+              <span class="en">Reading & Writing</span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="container" id="research">
+      <div class="section-heading">
+        <p>
+          <span class="zh">研究档案</span>
+          <span class="en">Research archive</span>
+        </p>
+
+        <h2>
+          <span class="zh">论文与项目</span>
+          <span class="en">Papers and projects</span>
+        </h2>
+      </div>
+
+      <div class="empty-state">
+        <h3>
+          <span class="zh">研究正在发生</span>
+          <span class="en">Research in progress</span>
+        </h3>
+
+        <p class="zh">
+          这里将来会展示论文题目、摘要、全文、研究过程、
+          参考文献和相关数据。目前先保留这个空间。
+        </p>
+
+        <p class="en">
+          This space will present paper titles, abstracts, full texts,
+          research processes, references, and related data.
+        </p>
+      </div>
+    </section>
+
+    <section class="container" id="tools">
+      <div class="section-heading">
+        <p>
+          <span class="zh">学习资源</span>
+          <span class="en">Resources</span>
+        </p>
+
+        <h2>
+          <span class="zh">常用工具</span>
+          <span class="en">Useful tools</span>
+        </h2>
+      </div>
+
+      <div class="tool-list">
+        <a
+          class="tool"
+          href="https://www.zotero.org/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <strong>Zotero</strong>
+          <span class="zh">文献管理与引用</span>
+          <span class="en">References and citation</span>
+        </a>
+
+        <a
+          class="tool"
+          href="https://scholar.google.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <strong>Google Scholar</strong>
+          <span class="zh">学术资料检索</span>
+          <span class="en">Academic search</span>
+        </a>
+
+        <a
+          class="tool"
+          href="https://archive.org/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <strong>Internet Archive</strong>
+          <span class="zh">开放数字资料库</span>
+          <span class="en">Open digital archive</span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      © <span id="year"></span> Iris’s Place ·
+      <span class="zh">持续阅读，持续记录。</span>
+      <span class="en">Keep reading, keep documenting.</span>
+    </div>
+  </footer>
+
+  <script>
+    const root = document.documentElement;
+    const languageButton = document.getElementById("languageButton");
+    const themeButton = document.getElementById("themeButton");
+    const savedLanguage = localStorage.getItem("language");
+    const savedTheme = localStorage.getItem("theme");
+
+    if (savedLanguage === "en") {
+      root.lang = "en";
+    }
+
+    if (
+      savedTheme === "dark" ||
+      (!savedTheme &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches)
+    ) {
+      root.dataset.theme = "dark";
+    }
+
+    languageButton.addEventListener("click", () => {
+      const newLanguage = root.lang === "zh-CN" ? "en" : "zh-CN";
+      root.lang = newLanguage;
+      localStorage.setItem(
+        "language",
+        newLanguage === "en" ? "en" : "zh"
+      );
+    });
+
+    themeButton.addEventListener("click", () => {
+      const isDark = root.dataset.theme === "dark";
+
+      if (isDark) {
+        delete root.dataset.theme;
+        localStorage.setItem("theme", "light");
+      } else {
+        root.dataset.theme = "dark";
+        localStorage.setItem("theme", "dark");
+      }
+    });
+
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+  </script>
 </body>
 </html>
